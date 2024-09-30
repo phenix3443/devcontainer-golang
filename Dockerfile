@@ -1,7 +1,8 @@
 ARG VARIANT="1.17.3-erlang-27.1-debian-bullseye-20240926"
-ARG PHOENIX_VERSION="1.7.10"
-ARG NODEJS_VERSION="18"
 FROM hexpm/elixir:${VARIANT}
+
+ARG PHOENIX_VERSION="1.7.10"
+ARG NODE_VERSION="18"
 
 # This Dockerfile adds a non-root user with sudo access. Update the “remoteUser” property in
 # devcontainer.json to use it. More info: https://aka.ms/vscode-remote/containers/non-root-user.
@@ -31,10 +32,10 @@ RUN apt-get update \
   && /bin/bash /tmp/common-setup.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" \
   #
   # [Optional] Install Node.js for use with web applications
-  && if [ "${NODEJS_VERSION}" != "none" ]; then \
+  && if [ "${NODE_VERSION}" != "none" ]; then \
   curl -sSL ${NODE_SCRIPT_SOURCE} -o /tmp/node-setup.sh \
   && ([ "${NODE_SCRIPT_SHA}" = "dev-mode" ] || (echo "${NODE_SCRIPT_SHA} */tmp/node-setup.sh" | sha256sum -c -)) \
-  && /bin/bash /tmp/node-setup.sh "${NVM_DIR}" "${NODEJS_VERSION}" "${USERNAME}" \
+  && /bin/bash /tmp/node-setup.sh "${NVM_DIR}" "${NODE_VERSION}" "${USERNAME}" \
   && npm install -g cspell@latest; \
   fi \
   #
