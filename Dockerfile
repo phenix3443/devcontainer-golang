@@ -1,10 +1,6 @@
-ARG VARIANT="1.17.3-erlang-27.1-debian-bullseye-20240926"
-FROM hexpm/elixir:${VARIANT}
 
-# ARGs declared before FROM are not persisted beyond the FROM instruction.
-# They must be redeclared here to be available in the rest of the Dockerfile.
-ARG PHOENIX_VERSION="1.7.10"
-ARG NODE_VERSION="18"
+ARG VARIANT="1-1.23-bookworm"
+FROM mcr.microsoft.com/devcontainers/go:${VARIANT}
 
 # This Dockerfile adds a non-root user with sudo access. Update the “remoteUser” property in
 # devcontainer.json to use it. More info: https://aka.ms/vscode-remote/containers/non-root-user.
@@ -43,6 +39,4 @@ RUN apt-get update \
   && apt-get clean -y \
   && rm -rf /var/lib/apt/lists/* /tmp/common-setup.sh /tmp/node-setup.sh
 
-RUN su ${USERNAME} -c "mix local.hex --force \
-  && mix local.rebar --force \
-  && mix archive.install --force hex phx_new ${PHOENIX_VERSION}"
+

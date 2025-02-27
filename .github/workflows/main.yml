@@ -1,4 +1,4 @@
-name: Build Elixir devcontainer image
+name: Build Golang devcontainer image
 
 on:
   push:
@@ -7,10 +7,10 @@ env:
   DOCKER_REGISTRY: ghcr.io
   DOCKER_USERNAME: ${{ github.actor }}
   DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-  IMAGE_NAME: ghcr.io/blockscout/devcontainer-elixir
+  IMAGE_NAME: ghcr.io/phenix3443/devcontainer-golang
 
 jobs:
-  build-elixir:
+  build-golang:
     name: Docker image
     runs-on: ubuntu-latest
     permissions:
