@@ -2,6 +2,9 @@ name: Build Golang devcontainer image
 
 on:
   push:
+    branches:
+      - main  
+  workflow_dispatch:
 
 env:
   DOCKER_REGISTRY: ghcr.io
