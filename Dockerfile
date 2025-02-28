@@ -43,6 +43,7 @@ RUN apt-get update \
 RUN go install golang.org/x/tools/cmd/goimports@latest \
     && go install golang.org/x/tools/gopls@latest \
     && go install github.com/goreleaser/goreleaser/v2@latest \
-    && go install github.com/spf13/cobra-cli@latest
+    && go install github.com/spf13/cobra-cli@latest \
+    && go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 
 
