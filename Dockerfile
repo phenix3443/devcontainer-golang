@@ -40,7 +40,6 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* /tmp/common-setup.sh /tmp/node-setup.sh \
     #
     # Install go dependencies
-    && apt install goreleaser-pro\
     && go install golang.org/x/tools/cmd/goimports@latest \
     && go install golang.org/x/tools/gopls@latest \
     && go install github.com/goreleaser/goreleaser/v2@latest \
