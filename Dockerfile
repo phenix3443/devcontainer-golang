@@ -9,16 +9,14 @@ ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-# Options for common package install script
+RUN apt-get update
+
+# Install common packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 ARG INSTALL_ZSH="true"
 ARG UPGRADE_PACKAGES="true"
 ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev-containers/main/script-library/common-debian.sh"
 
-
-
-# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
-RUN apt-get update \
-    && export DEBIAN_FRONTEND=noninteractive \
+RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends curl ca-certificates build-essential iputils-ping bash-completion shfmt 2>&1 \
     && curl -sSL ${COMMON_SCRIPT_SOURCE} -o /tmp/common-setup.sh \
     && /bin/bash /tmp/common-setup.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" 
@@ -40,10 +38,9 @@ RUN go install github.com/goreleaser/goreleaser/v2@latest \
     && go install github.com/spf13/cobra-cli@latest \
     && go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 
-# Install code completions
+# Install scripts
 COPY script /usr/local/bin/
-RUN chmod +x /usr/local/bin/*.sh
-RUN /usr/local/bin/git-completion.sh
+RUN  bash /usr/local/bin/git-completion.sh
 
 # Clean up
 RUN apt-get autoremove -y \
