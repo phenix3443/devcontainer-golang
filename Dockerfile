@@ -32,7 +32,7 @@ RUN curl -sSL ${NODE_SCRIPT_SOURCE} -o /tmp/node-setup.sh \
     && npm install -g cspell@latest
 
 # Install database tools
-RUN apt-get install -y postgresql-client mysql-client redis-tools
+RUN apt-get install -y postgresql-client redis-tools
 
 # Install go dependencies
 RUN go install github.com/goreleaser/goreleaser/v2@latest \
