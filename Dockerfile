@@ -1,5 +1,5 @@
 
-ARG VARIANT="1-1.23-bookworm"
+ARG VARIANT="1-1.24-bookworm"
 FROM mcr.microsoft.com/devcontainers/go:${VARIANT}
 
 
