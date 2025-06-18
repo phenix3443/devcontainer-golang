@@ -19,7 +19,7 @@ ARG COMMON_SCRIPT_SOURCE="https://raw.githubusercontent.com/microsoft/vscode-dev
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends curl ca-certificates build-essential iputils-ping bash-completion shfmt 2>&1 \
     && curl -sSL ${COMMON_SCRIPT_SOURCE} -o /tmp/common-setup.sh \
-    && /bin/bash /tmp/common-setup.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" 
+    && /bin/bash /tmp/common-setup.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}"
 
 # Install Node.js for use with web applications
 ARG NODE_VERSION="20"
@@ -39,7 +39,8 @@ RUN go install github.com/goreleaser/goreleaser/v2@latest \
     && go install golang.org/x/tools/cmd/goimports@latest \
     && go install golang.org/x/tools/gopls@latest \
     && go install github.com/spf13/cobra-cli@latest \
-    && go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+    && go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest \
+    && go install github.com/swaggo/swag/cmd/swag@latest
 
 # Install scripts
 COPY script /usr/local/bin/
